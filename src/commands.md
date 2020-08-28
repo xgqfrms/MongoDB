@@ -46,7 +46,6 @@ $ mongo
 # 查看表(集合)
 > show tables
 
-
 ## 查询文档 find
 # > db.collection_name.find(query, projection)
 > db.test_table.find().pretty()
@@ -55,35 +54,35 @@ $ mongo
 # { "_id" : ObjectId("5f492c2d5c778acee17db436"), "name" : "xgqfrms" }
 
 # 插入文档
-# db.collection_name.insert(document)
+# > db.collection_name.insert(document)
 # 或
-# db.collection_name.save(document)
-db.test_table.insert({
+# > db.collection_name.save(document)
+> db.test_table.insert({
   name: "website",
   url: "https://www.xgqfrms.xyz",
 });
-# db.test_table.insert({
+# > db.test_table.insert({
 #   "name": "website",
 #   "url": "https://www.xgqfrms.xyz",
 # });
-db.test_table.insert({
+> db.test_table.insert({
   "name": "cdn",
   "url": "https://cdnxgqfrms.xyz",
 });
 
 # 更新文档
 # update() 和 save()
-# db.collection_name.update(
+# > db.collection_name.update(
 #   <query>,
 #   <update>,
 # )
-db.test_table.update(
+> db.test_table.update(
   {name: "website"},
   {
     $set: {year: 2020},
   },
 )
-# db.test_table.update(
+# > db.test_table.update(
 #   {"name": "website"},
 #   {
 #     $set: {"year": 2020},
@@ -91,17 +90,17 @@ db.test_table.update(
 # )
 
 # 删除文档
-# db.collection_name.remove(
+# > db.collection_name.remove(
 #   <query>,
 #   {
 #     justOne: <boolean>,
 #     writeConcern: <document>
 #   }
 # )
-db.test_table.remove(
+> db.test_table.remove(
   {name: "website"},
 )
-# db.test_table.remove(
+# > db.test_table.remove(
 #   {"name": "website"},
 # )
 
@@ -115,6 +114,10 @@ db.test_table.remove(
 
 # 删除当前数据库
 > db.dropDatabase()
+
+
+# 退出 mongo
+> exit
 
 ```
 
