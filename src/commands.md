@@ -48,16 +48,16 @@ $ mongo
 
 
 ## 查询文档 find
-# > db.collection.find(query, projection)
+# > db.collection_name.find(query, projection)
 > db.test_table.find().pretty()
 # { "_id" : ObjectId("5f492c2d5c778acee17db436"), "name" : "xgqfrms" }
 > db.test_table.find().projection()
 # { "_id" : ObjectId("5f492c2d5c778acee17db436"), "name" : "xgqfrms" }
 
 # 插入文档
-# db.test_table.insert(document)
+# db.collection_name.insert(document)
 # 或
-# db.test_table.save(document)
+# db.collection_name.save(document)
 db.test_table.insert({
   name: "website",
   url: "https://www.xgqfrms.xyz",
@@ -73,7 +73,7 @@ db.test_table.insert({
 
 # 更新文档
 # update() 和 save()
-# db.test_table.update(
+# db.collection_name.update(
 #   <query>,
 #   <update>,
 # )
@@ -89,6 +89,24 @@ db.test_table.update(
 #     $set: {"year": 2020},
 #   },
 # )
+
+# 删除文档
+# db.collection_name.remove(
+#   <query>,
+#   {
+#     justOne: <boolean>,
+#     writeConcern: <document>
+#   }
+# )
+db.test_table.remove(
+  {name: "website"},
+)
+# db.test_table.remove(
+#   {"name": "website"},
+# )
+
+# 删除所有数据，(类似常规 SQL 的 truncate 命令)
+> db.test_table.remove({})
 
 
 # 删除集合
@@ -106,7 +124,7 @@ db.test_table.update(
 ```sh
 # MongoDB 查询文档数据的语法格式
 
-db.collection.find(query, projection)
+db.collection_name.find(query, projection)
 
 # query ：可选，使用查询操作符指定查询条件
 # projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）
@@ -119,17 +137,17 @@ db.collection.find(query, projection)
 
 ```sh
 
-db.COLLECTION_NAME.insert(document)
+db.collection_name.insert(document)
 # 或
-db.COLLECTION_NAME.save(document)
+db.collection_name.save(document)
 
 ```
 
-## # 更新文档
+## 更新文档
 
 ```sh
 # update() 和 save()
-db.collection.update(
+db.collection_name.update(
   <query>,
   <update>,
   {
@@ -148,5 +166,19 @@ db.collection.update(
 # multi: 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新
 
 # writeConcern: 可选，抛出异常的级别。
+
+```
+
+## 删除文档
+
+```sh
+
+db.collection_name.remove(
+  <query>,
+  {
+    justOne: <boolean>,
+    writeConcern: <document>
+  }
+)
 
 ```
